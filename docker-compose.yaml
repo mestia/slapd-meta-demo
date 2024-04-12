@@ -1,0 +1,53 @@
+services:
+  openldap_meta:
+    image: bitnami/openldap:latest
+    hostname: meta
+    ports:
+      - '1389:1389'
+      - '1636:1636'
+    environment:
+       LDAP_LOGLEVEL : 256
+       LDAP_TLS_VERIFY_CLIENT: never
+       LDAP_ROOT: 'dc=local,dc=blackmesa,dc=gov'
+       LDAP_ENABLE_TLS: yes
+       LDAP_TLS_CERT_FILE: '/opt/bitnami/openldap/certs/servercert.pem'
+       LDAP_TLS_CA_FILE: '/opt/bitnami/openldap/certs/servercert.pem'
+       LDAP_TLS_KEY_FILE: '/opt/bitnami/openldap/certs/serverkey.pem'
+       LDAP_CONFIG_ADMIN_ENABLED: yes
+       LDAP_CONFIG_ADMIN_USERNAME: 'admin'
+       LDAP_CONFIG_ADMIN_PASSWORD: 'config'
+       BITNAMI_DEBUG: true
+       META_SUFFIX: 'dc=meta'
+       META_LDAPS_PORT: 1636
+       META_REMOTE_URI: 'ldaps://openldap_remote:2636'
+       META_REMOTE_DIR_SUFFIX: 'dc=blackmesa,dc=gov'
+       META_LOCAL_DC: 'dc=local,dc=blackmesa,dc=gov'
+       META_LDAP_CONFIG_ADMIN_USERNAME: 'admin'
+       META_LDAP_CONFIG_ADMIN_PASSWORD: 'config'
+    volumes:
+      - './certs_meta/:/opt/bitnami/openldap/certs/'
+      - './ldapdb_meta:/bitnami/openldap'
+  openldap_remote1:
+    image: bitnami/openldap:latest
+    hostname: openldap_remote
+    ports:
+      - '2389:2389'
+      - '2636:2636'
+    environment:
+       LDAP_PORT_NUMBER: 2389
+       LDAP_LDAPS_PORT_NUMBER: 2636
+       LDAP_LOGLEVEL : 256
+       LDAP_TLS_VERIFY_CLIENT: never
+       LDAP_ROOT: 'dc=blackmesa,dc=gov'
+       LDAP_ENABLE_TLS: yes
+       LDAP_TLS_CERT_FILE: '/opt/bitnami/openldap/certs/servercert.pem'
+       LDAP_TLS_CA_FILE: '/opt/bitnami/openldap/certs/servercert.pem'
+       LDAP_TLS_KEY_FILE: '/opt/bitnami/openldap/certs/serverkey.pem'
+       LDAP_CONFIG_ADMIN_ENABLED: yes
+       LDAP_CONFIG_ADMIN_USERNAME: 'admin'
+       LDAP_CONFIG_ADMIN_PASSWORD: 'config'
+       BITNAMI_DEBUG: true
+    volumes:
+      - './certs_remote/:/opt/bitnami/openldap/certs/'
+      - './ldapdb_remote:/bitnami/openldap'
+      - './ldifs:/ldifs'

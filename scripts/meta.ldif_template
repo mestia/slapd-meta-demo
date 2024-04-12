@@ -1,0 +1,22 @@
+dn: olcDatabase=meta,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcMetaConfig
+olcDatabase: meta
+olcSuffix: ${META_SUFFIX}
+olcLastMod: TRUE
+olcRootDN: ${META_LDAP_CONFIG_ROOT_DN}
+
+dn: olcMetaSub={0}uri,olcDatabase={3}meta,cn=config
+objectClass: olcMetaTargetConfig
+olcMetaSub: {0}uri
+olcDbURI: "${META_REMOTE_URI}/${META_REMOTE_DIR_SUFFIX},${META_SUFFIX}"
+olcDbRewrite: {0}suffixmassage "${META_REMOTE_DIR_SUFFIX},${META_SUFFIX}" "${META_REMOTE_DIR_SUFFIX}"
+olcDbStartTLS: start starttls=no tls_reqcert=never
+olcDbRebindAsUser: FALSE
+
+dn: olcMetaSub={1}uri,olcDatabase={3}meta,cn=config
+objectClass: olcMetaTargetConfig
+olcMetaSub: {1}uri
+olcDbURI: "ldapi:///${META_LOCAL_DC},${META_SUFFIX}"
+olcDbRebindAsUser: FALSE
+olcDbRewrite: {0}suffixmassage "${META_LOCAL_DC},${META_SUFFIX}" "${META_LOCAL_DC}"
