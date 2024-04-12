@@ -38,3 +38,11 @@ olcDbRewrite: {0}suffixmassage "<orig_dc>,dc=meta" "<orig_dc>"
 olcDbRebindAsUser: FALSE
 olcDbStartTLS: start starttls=no tls_reqcert=never
 ```
+
+
+Makefile options:
+
+make initdemo - start demo
+make purge_all stop and remove
+make cleanstate remove openldap data
+make start; make stop; docker compose up and down with -d option
