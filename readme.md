@@ -20,7 +20,7 @@ ldapvi --tls never -h ldaps://localhost:1636 -wconfig -D "cn=admin,cn=config"  -
 
 Access to the meta DIT:
 
-ldapvi --tls never -h ldaps://localhost:1636 -wconfig -D "cn=admin,cn=config"  -b dc=meta
+ldapvi --tls never -h ldaps://localhost:1636 -wadminpassword -D "cn=admin,cn=config"  -b dc=meta
 
 Access to the remote instance
 

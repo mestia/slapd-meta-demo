@@ -9,6 +9,7 @@ services:
        LDAP_LOGLEVEL : 256
        LDAP_TLS_VERIFY_CLIENT: never
        LDAP_ROOT: 'dc=local,dc=blackmesa,dc=gov'
+       LDAP_ADMIN_PASSWORD: 'adminpassword'
        LDAP_ENABLE_TLS: yes
        LDAP_TLS_CERT_FILE: '/opt/bitnami/openldap/certs/servercert.pem'
        LDAP_TLS_CA_FILE: '/opt/bitnami/openldap/certs/servercert.pem'
