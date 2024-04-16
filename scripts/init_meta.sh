@@ -15,7 +15,7 @@ ldif_template='scripts/meta.ldif_template'
 parse_yaml () {
 	local OPT="$1"
 	local FILE="$2"
-	perl -F"$OPT" -lanE '$F[1]=~s/([\w,=\/:]*)/say $1 if $1/ge' "$FILE"
+	perl -F"$OPT" -lanE '$F[1]=~s/([\w,\-=\/:]*)/say $1 if $1/ge' "$FILE"
 }
 
 parsed_config_pwd=$(parse_yaml 'META_LDAP_CONFIG_ADMIN_PASSWORD:' "$compose_file_loc")
