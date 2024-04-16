@@ -51,7 +51,7 @@ META_LOCAL_DC=${META_LOCAL_DC} \
 META_SUFFIX=${META_SUFFIX} \
 META_REMOTE_URI=${META_REMOTE_URI} \
 META_REMOTE_DIR_SUFFIX=${META_REMOTE_DIR_SUFFIX} \
-      	envsubst < "$ldif_template" | ldapadd -H ldaps://localhost:1636 -D "cn=${ldap_conf_user},cn=config" -w$ldap_conf_pwd
+	envsubst < "$ldif_template" | ldapadd -H ldaps://localhost:${META_LDAPS_PORT} -D "cn=${ldap_conf_user},cn=config" -w$ldap_conf_pwd
 
 
 #ldapmodify -H ldaps://localhost:1636 -D "cn=${ldap_conf_user},cn=config" -w$ldap_conf_pwd <<EOF
