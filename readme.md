@@ -44,6 +44,5 @@ olcDbStartTLS: start starttls=no tls_reqcert=never
 Makefile options:
 
  * make initdemo - start demo
- * make purge_all - stop and destroy containers
- * make cleanstate - remove openldap data
+ * make clean - stop containers, destroy data
  * make start; make stop; - docker compose up and down with -d option
