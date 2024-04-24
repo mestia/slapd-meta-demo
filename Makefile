@@ -15,14 +15,9 @@ initdemo:
 	docker compose down
 	docker compose up -d
 
-purge_all:
+clean:
 	docker compose down
 	rm -rf ${cert_dirs} ${data_dirs}
-
-cleanstate:
-	rm -rf ${data_dirs}
-	mkdir ${data_dirs}
-	chown -R ${userid} ${data_dirs}
 
 start:
 	docker compose up -d
