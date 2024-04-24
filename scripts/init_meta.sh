@@ -42,7 +42,7 @@ echo "\n"
 for module in back_{meta,ldap} translucent
 do
  echo "$module" \
- | perl -snE 'say "dn: cn=module{0},cn=config\nchangetype: modify\nadd: olcModuleLoad\nolcModuleLoad: $module\n-\n"' -- -module="${openldap_lib_dir}"/"$module".la
+ | perl -snE 'say "dn: cn=module{0},cn=config\nchangetype: modify\nadd: olcModuleLoad\nolcModuleLoad: $module\n-\n"' -- -module="${openldap_lib_dir}"/"$module"
 done \
 	| ldapmodify -H ldaps://localhost:${META_LDAPS_PORT} -D "cn=${ldap_conf_user},cn=config" -w${ldap_conf_pwd}
 
