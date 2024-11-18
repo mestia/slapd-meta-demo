@@ -14,17 +14,17 @@ ldif_template='scripts/meta.ldif_template'
 # parse docker-compose.yaml, works only for unique options
 parse_yaml () {
 	local OPT="$1"
-	local FILE="$2"
+	local FILE="${2:-$compose_file_loc}"
 	perl -F"$OPT" -lanE '$F[1]=~s/([\w,\-\.=\/:]*)/say $1 if $1/ge' "$FILE"
 }
 
-parsed_config_pwd=$(parse_yaml 'META_LDAP_CONFIG_ADMIN_PASSWORD:' "$compose_file_loc")
-parsed_config_user=$(parse_yaml 'META_LDAP_CONFIG_ADMIN_USERNAME:' "$compose_file_loc")
-META_SUFFIX=$(parse_yaml 'META_SUFFIX:' "$compose_file_loc")
-META_REMOTE_URI=$(parse_yaml 'META_REMOTE_URI:' "$compose_file_loc")
-META_REMOTE_DIR_SUFFIX=$(parse_yaml 'META_REMOTE_DIR_SUFFIX:' "$compose_file_loc")
-META_LOCAL_DC=$(parse_yaml 'META_LOCAL_DC:' "$compose_file_loc")
-META_LDAPS_PORT=$(parse_yaml 'META_LDAPS_PORT:' "$compose_file_loc")
+parsed_config_pwd=$(parse_yaml 'META_LDAP_CONFIG_ADMIN_PASSWORD:')
+parsed_config_user=$(parse_yaml 'META_LDAP_CONFIG_ADMIN_USERNAME:')
+META_SUFFIX=$(parse_yaml 'META_SUFFIX:')
+META_REMOTE_URI=$(parse_yaml 'META_REMOTE_URI:')
+META_REMOTE_DIR_SUFFIX=$(parse_yaml 'META_REMOTE_DIR_SUFFIX:')
+META_LOCAL_DC=$(parse_yaml 'META_LOCAL_DC:')
+META_LDAPS_PORT=$(parse_yaml 'META_LDAPS_PORT:')
 
 ldap_conf_pwd="${parsed_config_pwd:-config}"
 ldap_conf_user="${parsed_config_user:-admin}"
